@@ -1,7 +1,6 @@
 import disnake
 from disnake.ext import commands
 bot = commands.Bot(command_prefix=disnake.ext.commands.when_mentioned)
-print(__name__)
 
 if __name__ == '__main__':
     @bot.event
