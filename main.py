@@ -1,21 +1,14 @@
 import disnake
 from disnake.ext import commands
-bot = commands.Bot(command_prefix=disnake.ext.commands.when_mentioned)
+bot = commands.Bot(command_prefix=commands.when_mentioned)
 
 if __name__ == '__main__':
     @bot.event
     async def on_ready():
         print(f"{bot.user} работает!")
-    
+        
     bot.load_extension("cogs.color")
-
-    @bot.event
-    async def on_slash_command_error(inter: disnake.ApplicationCommandInteraction, error: commands.CommandError):
-        print(error.args)
-        if isinstance(error, commands.errors.NotOwner):
-            await inter.response.send_message("Эту комманду может использовать только владелец бота!", flags=disnake.MessageFlags(ephemeral=True), delete_after=5.0)
-
-    
+    bot.load_extension("cogs.errors")
 
     @bot.slash_command(description='Перезагрузка когов', default_member_permissions=disnake.Permissions(administrator=True))
     @commands.is_owner()
