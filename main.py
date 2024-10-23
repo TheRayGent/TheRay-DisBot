@@ -12,8 +12,8 @@ if __name__ == '__main__':
 
     @bot.slash_command(description='Перезагрузка когов', default_member_permissions=disnake.Permissions(administrator=True))
     @commands.is_owner()
-    async def reload(inter: disnake.ApplicationCommandInteraction, cog_name: str = commands.Param(choices=['Все коги']+[j for j, j1 in bot.extensions.items()])):
-        if cog_name == 'Все коги':
+    async def reload(inter: disnake.ApplicationCommandInteraction, cog_name: str = commands.Param(default=None, choices=[j for j, j1 in bot.extensions.items()])):
+        if cog_name == None:
             for i in [j for j, j1 in bot.extensions.items()]:
                 bot.reload_extension(i)
                 print(i, 'перезагружен!')

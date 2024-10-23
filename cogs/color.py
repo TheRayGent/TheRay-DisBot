@@ -6,14 +6,15 @@ class ColorChoice(commands.Cog):
         self.bot = bot
 
     @commands.slash_command()
-    async def animals(inter: disnake.ApplicationCommandInteraction):
-        """Sends a message with our dropdown containing the animals"""
-
+    async def color(inter: disnake.ApplicationCommandInteraction, colors: disnake.Role = None):
+        print(inter.guild.roles[4].members[0].guild.members)
         await inter.response.send_message(
-            "What is your favorite type of animal?",
-            components=[
+            f"{inter.guild.members}"
+            
+        )
+        '''components=[
                 disnake.ui.StringSelect(
-                    custom_id="fav_animal",
+                    custom_id="color_choice",
                     options=[
                         disnake.SelectOption(label="Dog", description="Dogs are your favorite type of animal", value='YA'),
                         "Cat",
@@ -22,16 +23,12 @@ class ColorChoice(commands.Cog):
                     ],
                     min_values=0
                 )
-            ],
-        )
+            ]'''
+    
     @commands.Cog.listener('on_dropdown')
-    async def fav_animal_listener(self, inter: disnake.MessageInteraction):
-        # First we should check if the interaction is for the `fav_animal` dropdown we created
-        # and ignore if it isn't.
+    async def color_listener(self, inter: disnake.MessageInteraction):
         if inter.component.custom_id != "fav_animal":
             return
-
-        # Now we can respond with the user's favorite animal
         await inter.response.send_message(f"A{inter.values}")
 
 
