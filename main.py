@@ -1,12 +1,11 @@
 import disnake
 from disnake.ext import commands
-bot = commands.Bot(command_prefix=commands.when_mentioned)
+bot = commands.Bot(command_prefix=commands.when_mentioned, reload=True)
 
 if __name__ == '__main__':
     @bot.event
     async def on_ready():
         print(f"{bot.user} работает!")
-        
     bot.load_extension("cogs.color")
     bot.load_extension("cogs.errors")
 
@@ -22,7 +21,5 @@ if __name__ == '__main__':
             bot.reload_extension(cog_name)
             print(cog_name, 'перезагружен!')
             await inter.response.send_message(f'{cog_name} перезагружен!')
-    
-        
 
-bot.run("MTI5MjQ2MzI5NTMwMjk5MjAwNA.G6PHIF.mFVY3WVNb9dZkwEIPNUJuyKN8MLoMjpkC_U-Wg")
+bot.run("MTI5MjQ2MzI5NTMwMjk5MjAwNA.G7c41P.q9XEHYyei2Gyc58MZYWjVYLpslcxkSKRanOq28")
