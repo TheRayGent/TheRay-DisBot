@@ -22,4 +22,4 @@ if __name__ == '__main__':
             print(cog_name, 'перезагружен!')
             await inter.response.send_message(f'{cog_name} перезагружен!')
 
-bot.run("MTI5MjQ2MzI5NTMwMjk5MjAwNA.G7c41P.q9XEHYyei2Gyc58MZYWjVYLpslcxkSKRanOq28")
+bot.run("")
