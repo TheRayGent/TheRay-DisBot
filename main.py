@@ -1,7 +1,9 @@
+from configparser import ConfigParser
 import disnake
 from disnake.ext import commands
-bot = commands.Bot(command_prefix=commands.when_mentioned, reload=True)
-
+cfg = ConfigParser()
+bot = commands.Bot(command_prefix=commands.when_mentioned, reload=True, intents=disnake.Intents.all())
+cfg.read('cfg.cfg')
 if __name__ == '__main__':
     @bot.event
     async def on_ready():
@@ -21,5 +23,4 @@ if __name__ == '__main__':
             bot.reload_extension(cog_name)
             print(cog_name, 'перезагружен!')
             await inter.response.send_message(f'{cog_name} перезагружен!')
-
-bot.run("MTI5MjQ2MzI5NTMwMjk5MjAwNA.G7c41P.q9XEHYyei2Gyc58MZYWjVYLpslcxkSKRanOq28")
+bot.run(cfg.get('Default', 'bot_key'))
