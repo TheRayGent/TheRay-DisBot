@@ -49,7 +49,9 @@ class ColorChoice(commands.Cog):
                 ]
             )
         else: await inter.response.send_message('Вы не выбрали ни одну роль!', flags=disnake.MessageFlags(ephemeral=True), delete_after=10.0)
-         
+    
+        
+        
     @commands.slash_command()
     @commands.is_owner()
     async def test(inter: disnake.ApplicationCommandInteraction):
@@ -60,14 +62,11 @@ class ColorChoice(commands.Cog):
         
         if inter.component.custom_id != "color_choice":
             return
-        
+
         await inter.response.defer(with_message=True, ephemeral=True)
-        a = [int(i.value) for i in inter.component.options]
-        b = list(inter.author._roles)
-        for i in b:
-            if i in a:
-                await inter.author.remove_roles(inter.guild.get_role(i))
-                break
+        a = [inter.guild.get_role(int(i.value)) for i in inter.component.options]
+        for i in a:
+            await inter.author.remove_roles(i)
         if inter.values != None: 
             await inter.author.add_roles(inter.guild.get_role(int(inter.values[0])))
         await inter.edit_original_message('Ваш цвет изменён!')
