@@ -11,6 +11,7 @@ if __name__ == '__main__':
         print(f"{bot.user} работает!")
     bot.load_extension("cogs.color")
     bot.load_extension("cogs.errors")
+    bot.load_extension('cogs.miscellaneous')
 
     @bot.slash_command(description='Перезагрузка когов', default_member_permissions=disnake.Permissions(administrator=True))
     @commands.is_owner()
